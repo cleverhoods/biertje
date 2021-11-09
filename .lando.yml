@@ -9,10 +9,10 @@ config:
 
 proxy:
   mailhog:
-    - "mailhog.lando-goodies.lndo.site"
+    - "mailhog.biertje.lndo.site"
 
 services:
   appserver:
     overrides:
       environment:
-        DRUSH_OPTIONS_URI: "https://lando-goodies.lndo.site"
+        DRUSH_OPTIONS_URI: "https://biertje.lndo.site"
