@@ -1,0 +1,17 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+
+<div>
+  {% for beer in beers %}
+    <div class="beer-container">{{ beer }}</div>
+  {% endfor %}
+</div>
+

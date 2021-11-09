@@ -1,0 +1,26 @@
+uuid: 28b05799-a251-4ac0-acd1-f491546dee73
+langcode: en
+status: true
+dependencies:
+  module:
+    - biertje
+    - system
+  theme:
+    - claro
+id: beeroftheday
+theme: claro
+region: content
+weight: 0
+provider: null
+plugin: beer_of_the_day_block
+settings:
+  id: beer_of_the_day_block
+  label: 'Beer of the day'
+  provider: biertje
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/1
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,11 @@
+biertje.configurations:
+  title: Biertje
+  route_name: biertje.configurations
+  description: 'Biertje module configurations.'
+  parent: system.admin_config
+
+biertje.punk_api_config_form:
+  title: 'API Configuration'
+  route_name: biertje.punk_api_config_form
+  description: 'API Configurations'
+  parent: biertje.configurations

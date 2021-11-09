@@ -1,0 +1,35 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+
+<div>
+  <div>
+    <label>{{ 'Title'|t }}:</label>
+    <span>{{ name }}</span>
+  </div>
+  <div>
+    <label>{{ 'Tagline'|t }}:</label>
+    <span>{{ tagline }}</span>
+  </div>
+  <div>
+    <label>{{ 'ABV.'|t }}:</label>
+    <span>{{ abv }}%</span>
+  </div>
+  <div>
+    <label>{{ 'Image'|t }}:</label>
+    <span>
+      {% if image_url is not empty %}
+        <img alt="{{ name }}" title="{{ name }}" src="{{ image_url }}" />
+      {% else %}
+        {{ 'No image url was provided'|t }}
+      {% endif %}
+    </span>
+  </div>
+</div>

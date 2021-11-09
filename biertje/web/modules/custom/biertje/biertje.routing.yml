@@ -1,0 +1,26 @@
+biertje.configurations:
+  path: '/admin/config/biertje'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Biertje'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+biertje.punk_api_config_form:
+  path: '/admin/config/biertje/apiconfig'
+  defaults:
+    _form: '\Drupal\biertje\Form\PunkApiConfigForm'
+    _title: 'PunkApiConfigForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+biertje.beer_by_dish_search_form:
+  path: '/biertje/form/beer_by_dish_search'
+  defaults:
+    _form: '\Drupal\biertje\Form\BeerByDishSearchForm'
+    _title: 'BeerByDishSearchForm'
+  requirements:
+    _access: 'TRUE'

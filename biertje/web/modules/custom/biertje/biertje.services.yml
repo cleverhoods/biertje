@@ -1,0 +1,15 @@
+services:
+  biertje.get_beer:
+    class: Drupal\biertje\Services\GetBeerService
+    arguments: ['@http_client_factory', '@config.factory', '@cache.biertje', '@datetime.time', '@logger.channel.biertje']
+
+  cache.biertje:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: ['biertje']
+
+  logger.channel.biertje:
+    parent: logger.channel_base
+    arguments: ['biertje']

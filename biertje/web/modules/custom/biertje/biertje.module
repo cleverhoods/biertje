@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * module file.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function biertje_theme() {
+  return [
+    'beer_of_the_day_block' => [
+      'variables' => [
+        'name' => NULL,
+        'image_url' => NULL,
+        'tagline' => NULL,
+        'abv' => NULL,
+      ],
+    ],
+    'beer_by_dish_block' => [
+      'variables' => [
+        'beers' => NULL,
+      ],
+    ],
+  ];
+}

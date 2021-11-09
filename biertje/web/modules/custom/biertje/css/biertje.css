@@ -1,0 +1,7 @@
+#beers-by-dish {
+  overflow: hidden;
+}
+
+.beer-container {
+  float: left;
+}

@@ -1,0 +1,5 @@
+biertje:
+  version: 1.0
+  css:
+    base:
+      css/biertje.css: {}

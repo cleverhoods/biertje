@@ -1,0 +1,26 @@
+uuid: 44caed7a-abb8-437c-91c1-6f7ebcecf3a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - biertje
+    - system
+  theme:
+    - claro
+id: beerbydish
+theme: claro
+region: content
+weight: 0
+provider: null
+plugin: beer_by_dish_block
+settings:
+  id: beer_by_dish_block
+  label: 'Beer by dish'
+  provider: biertje
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /node/1
+    negate: false
+    context_mapping: {  }

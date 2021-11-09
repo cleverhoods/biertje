@@ -1,0 +1,6 @@
+name: Biertje
+type: module
+description: 'PUNK API consumer which provides blocks'
+core: 8.x
+package: CleverHoods
+configure: biertje.configurations

@@ -1,0 +1,5 @@
+name: 'Biertje | Default content'
+type: module
+description: 'Providing default page content'
+core: 8.x
+package: 'CleverHoods'
