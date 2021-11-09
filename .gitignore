@@ -23,3 +23,7 @@
 /.env
 .editorconfig
 .gitattributes
+
+# Lando specific exclusions
+.lando.local.yml
+.lando.base.yml

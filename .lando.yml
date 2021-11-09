@@ -1,32 +1,18 @@
 name: biertje
-recipe: drupal8
+recipe: drupal9
 
 config:
   via: apache:2.4
-  php: 7.3
-  database: mariadb:10.2
+  php: "8.0"
+  database: mariadb
   webroot: web
-  xdebug: on
 
-tooling:
-  drupal:
-    service: appserver
-    description: "Running Drupal Console commands"
-    cmd: vendor/bin/drupal
-  drush:
-    service: appserver
-    description: "Runs drush command in the webroot"
-    cmd: "export PHP_IDE_CONFIG=\"serverName=appserver\" && /app/vendor/bin/drush --root=/app/web"
-  site-install:
-    service: appserver
-    description: "Running site installation script"
-    cmd: bash scripts/site-install.sh
-  unit-test:
-    service: appserver
-    description: "Running site installation script"
-    cmd: "vendor/bin/phpunit -c /app/web/core /app/web/modules/custom/biertje/tests --group biertje"
+proxy:
+  mailhog:
+    - "mailhog.lando-goodies.lndo.site"
 
 services:
   appserver:
     overrides:
-      dns: 8.8.8.8
+      environment:
+        DRUSH_OPTIONS_URI: "https://lando-goodies.lndo.site"
