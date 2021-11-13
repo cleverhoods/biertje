@@ -3,6 +3,7 @@
 namespace Drupal\biertje\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -21,12 +22,12 @@ class BeerByDishBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *
    * @var \Drupal\Core\Form\FormBuilderInterface
    */
-  protected $formBuilder;
+  protected FormBuilderInterface $formBuilder;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): BeerByDishBlock|ContainerFactoryPluginInterface|static {
     $instance = new static($configuration, $plugin_id, $plugin_definition);
     $instance->formBuilder = $container->get('form_builder');
     return $instance;
@@ -35,7 +36,7 @@ class BeerByDishBlock extends BlockBase implements ContainerFactoryPluginInterfa
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(): array {
     $build = [];
     $builtForm = $this->formBuilder->getForm('Drupal\biertje\Form\BeerByDishSearchForm');
     $build['form'] = $builtForm;

@@ -6,9 +6,11 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\Logger\LoggerChannelInterface;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -22,35 +24,35 @@ class GetBeerService implements ContainerInjectionInterface {
    *
    * @var \GuzzleHttp\Client
    */
-  protected $httpClient;
+  protected Client $httpClient;
 
   /**
    * The configuration factory.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $configFactory;
+  protected ConfigFactoryInterface $configFactory;
 
   /**
    * The cache bin we can use to store responses in.
    *
    * @var \Drupal\Core\Cache\CacheBackendInterface
    */
-  protected $cache;
+  protected CacheBackendInterface $cache;
 
   /**
    * The time service.
    *
    * @var \Drupal\Component\Datetime\TimeInterface
    */
-  protected $time;
+  protected TimeInterface $time;
 
   /**
    * A logger to write to the log.
    *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
-  protected $logger;
+  protected LoggerChannelInterface $logger;
 
   /**
    * GetBeerService constructor.
@@ -105,12 +107,12 @@ class GetBeerService implements ContainerInjectionInterface {
    * @param array $parameters
    *   Parameters for making the request.
    * @param int $cacheLifetime
-   *   Cache life time.
+   *   Cache lifetime.
    *
-   * @return bool|mixed
+   * @return mixed
    *   Either the results in array or FALSE.
    */
-  public function getBeer(string $endpoint, array $parameters = [], $cacheLifetime = 120) {
+  public function getBeer(string $endpoint, array $parameters = [], int $cacheLifetime = 120): mixed {
 
     $cid = $endpoint . Json::encode($parameters);
     $cache = $this->cache->get($cid);
@@ -140,7 +142,7 @@ class GetBeerService implements ContainerInjectionInterface {
    * @return \Drupal\Core\Config\ImmutableConfig
    *   An immutable config object.
    */
-  protected function getConfig() {
+  protected function getConfig(): ImmutableConfig {
     return $this->configFactory->get('biertje.settings');
   }
 
@@ -150,7 +152,7 @@ class GetBeerService implements ContainerInjectionInterface {
    * @return string
    *   An URI string.
    */
-  protected function getUri() {
+  protected function getUri(): string {
     $config = $this->getConfig();
     return $config->get('punk_api.base_uri');
   }
@@ -164,7 +166,7 @@ class GetBeerService implements ContainerInjectionInterface {
    * @return array
    *   Renderable array.
    */
-  public function prepareData(array $data) {
+  public function prepareData(array $data): array {
     $fields = [
       'name',
       'image_url',

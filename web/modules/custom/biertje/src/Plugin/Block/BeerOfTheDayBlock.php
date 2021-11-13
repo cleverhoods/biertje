@@ -2,6 +2,7 @@
 
 namespace Drupal\biertje\Plugin\Block;
 
+use Drupal\biertje\Services\GetBeerService;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,12 +22,12 @@ class BeerOfTheDayBlock extends BlockBase implements ContainerFactoryPluginInter
    *
    * @var \Drupal\biertje\Services\GetBeerService
    */
-  protected $getBeerService;
+  protected GetBeerService $getBeerService;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): BeerOfTheDayBlock|ContainerFactoryPluginInterface|static {
     $instance = new static($configuration, $plugin_id, $plugin_definition);
     $instance->getBeerService = $container->get('biertje.get_beer');
     return $instance;
@@ -35,16 +36,15 @@ class BeerOfTheDayBlock extends BlockBase implements ContainerFactoryPluginInter
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(): array {
     $build = [
       '#theme' => 'beer_of_the_day_block',
     ];
 
     $beer = $this->getBeerService->getBeer('beers/random', [], 86400);
     $data = $this->getBeerService->prepareData($beer[0]);
-    $build = array_merge($build, $data);
 
-    return $build;
+    return array_merge($build, $data);
   }
 
 }

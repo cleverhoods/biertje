@@ -2,10 +2,14 @@
 
 namespace Drupal\biertje\Form;
 
+use Drupal\biertje\Services\GetBeerService;
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -18,14 +22,14 @@ class BeerByDishSearchForm extends FormBase {
    *
    * @var \Drupal\biertje\Services\GetBeerService
    */
-  protected $getBeerService;
+  protected GetBeerService $getBeerService;
 
   /**
    * The renderer.
    *
    * @var \Drupal\Core\Render\RendererInterface
    */
-  protected $renderer;
+  protected RendererInterface $renderer;
 
   /**
    * {@inheritdoc}
@@ -40,14 +44,14 @@ class BeerByDishSearchForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'beer_by_dish_search_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['dish'] = [
       '#type' => 'textfield',
       '#required' => TRUE,
@@ -90,7 +94,7 @@ class BeerByDishSearchForm extends FormBase {
    *
    * @throws \Exception
    */
-  public function getBeerByDishCallback(array $form, FormStateInterface $form_state) {
+  public function getBeerByDishCallback(array $form, FormStateInterface $form_state): AjaxResponse {
     $output = '<div id="beers-by-dish">' . $this->getBeerByDish($form_state->getValue('dish')) . '</div>';
 
     $response = new AjaxResponse();
@@ -114,7 +118,7 @@ class BeerByDishSearchForm extends FormBase {
    *
    * @throws \Exception
    */
-  private function getBeerByDish(string $dish) {
+  private function getBeerByDish(string $dish): MarkupInterface|TranslatableMarkup {
 
     $params = [
       'query' => [

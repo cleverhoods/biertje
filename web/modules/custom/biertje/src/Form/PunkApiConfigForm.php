@@ -2,7 +2,6 @@
 
 namespace Drupal\biertje\Form;
 
-use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -14,7 +13,7 @@ class PunkApiConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames(): array {
     return [
       'biertje.settings',
     ];
@@ -23,14 +22,14 @@ class PunkApiConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'punk_api_config_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $config = $this->config('biertje.settings');
     $form['punk_api_base_uri'] = [
       '#type' => 'url',
